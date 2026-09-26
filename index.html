@@ -1,0 +1,1574 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carlos Wiebe Baca — Portafolio</title>
+    <meta
+      name="description"
+      content="Portafolio de Carlos Wiebe Baca: desarrollo web, proyectos, CBDEVS y contacto."
+    />
+    <meta name="theme-color" content="#08050f" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ============================================================
+         TOKENS — "Spec Sheet" system: blueprint/drafting-paper look.
+         Light = default (drafting paper). Dark = ink blueprint.
+      ============================================================ */
+      :root {
+        /* Dark = default. Terminal-in-a-dead-server look: near-black
+           violet paper, phosphor-green + violet signal colors. */
+        color-scheme: dark;
+        --paper: #08050f;
+        --grid-line: rgba(168, 85, 247, 0.07);
+        --card: #0e0a1a;
+        --card-alt: #120d20;
+        --ink: #ece8f8;
+        --ink-muted: rgba(236, 232, 248, 0.7);
+        --ink-subtle: rgba(236, 232, 248, 0.48);
+        --blueprint: #b371fb;
+        --blueprint-deep: #d9baff;
+        --signal: #3ddc84;
+        --success: #3ddc84;
+        --amber: #fbbf24;
+        --border: rgba(236, 232, 248, 0.12);
+        --border-strong: rgba(179, 113, 251, 0.4);
+        --shadow: 0 0 0 1px rgba(179, 113, 251, 0.1), 0 24px 70px rgba(0, 0, 0, 0.6);
+        --radius: 2px;
+        --radius-lg: 4px;
+        --max: 1120px;
+        --ring: 0 0 0 3px rgba(179, 113, 251, 0.4);
+        --font-display: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+        --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+        --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+      }
+
+      html[data-theme="light"] {
+        /* Light = same terminal system, printed on paper instead of glass. */
+        color-scheme: light;
+        --paper: #f6f3fc;
+        --grid-line: rgba(124, 58, 237, 0.08);
+        --card: #ffffff;
+        --card-alt: #f1ecfb;
+        --ink: #170f2b;
+        --ink-muted: rgba(23, 15, 43, 0.68);
+        --ink-subtle: rgba(23, 15, 43, 0.5);
+        --blueprint: #7c3aed;
+        --blueprint-deep: #5b21b6;
+        --signal: #0f9d58;
+        --success: #15803d;
+        --amber: #b45309;
+        --border: rgba(23, 15, 43, 0.13);
+        --border-strong: rgba(124, 58, 237, 0.32);
+        --shadow: 0 20px 60px rgba(23, 15, 43, 0.12);
+        --ring: 0 0 0 3px rgba(124, 58, 237, 0.3);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.001ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--font-body);
+        color: var(--ink);
+        background-color: var(--paper);
+        background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+        background-size: 42px 42px;
+        -webkit-font-smoothing: antialiased;
+        position: relative;
+      }
+
+      /* Faint scanline texture — always on, very low opacity so text stays readable */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 90;
+        background-image: repeating-linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.018) 0px,
+          rgba(255, 255, 255, 0.018) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+        mix-blend-mode: overlay;
+      }
+
+      html[data-theme="light"] body::before {
+        opacity: 0.4;
+      }
+
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--paper);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border-strong);
+        border: 2px solid var(--paper);
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--blueprint);
+      }
+      html {
+        scrollbar-color: var(--border-strong) var(--paper);
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: var(--font-display);
+        letter-spacing: -0.01em;
+        margin: 0;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      ::selection {
+        background: rgba(179, 113, 251, 0.35);
+        color: var(--ink);
+      }
+
+      .container {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 0 22px;
+      }
+
+      .mono {
+        font-family: var(--font-mono);
+      }
+
+      :focus-visible {
+        outline: none;
+        box-shadow: var(--ring);
+        border-radius: 2px;
+      }
+
+      /* ================= Skip link ================= */
+      .skip-link {
+        position: absolute;
+        left: 16px;
+        top: 10px;
+        padding: 10px 14px;
+        background: var(--card);
+        border: 1px solid var(--border-strong);
+        box-shadow: var(--shadow);
+        transform: translateY(-160%);
+        transition: transform 160ms ease;
+        z-index: 80;
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 13px;
+      }
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+
+      /* ================= Header ================= */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: color-mix(in srgb, var(--paper) 88%, transparent);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 0;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        font-family: var(--font-mono);
+        font-weight: 700;
+        font-size: 13px;
+        color: #08050f;
+        background: var(--blueprint);
+        border: 1px solid var(--blueprint);
+        box-shadow: 0 0 14px rgba(179, 113, 251, 0.45);
+      }
+
+      html[data-theme="light"] .brand-mark {
+        color: var(--paper);
+        background: var(--ink);
+        border-color: var(--ink);
+        box-shadow: none;
+      }
+
+      .brand-text {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 15px;
+      }
+
+      .nav {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+      }
+
+      .nav-link {
+        text-decoration: none;
+        color: var(--ink-muted);
+        font-family: var(--font-mono);
+        font-weight: 500;
+        font-size: 13px;
+        padding: 8px 4px;
+        border-bottom: 2px solid transparent;
+        transition: color 140ms ease, border-color 140ms ease;
+      }
+
+      .nav-link::before {
+        content: "[";
+        margin-right: 3px;
+        color: var(--ink-subtle);
+      }
+      .nav-link::after {
+        content: "]";
+        margin-left: 3px;
+        color: var(--ink-subtle);
+      }
+
+      .nav-link:hover {
+        color: var(--blueprint);
+        border-bottom-color: var(--blueprint);
+      }
+      .nav-link:hover::before,
+      .nav-link:hover::after {
+        color: var(--blueprint);
+      }
+
+      .header-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+
+      /* ================= Buttons ================= */
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 16px;
+        border-radius: var(--radius);
+        border: 1px solid var(--border-strong);
+        background: var(--card);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 13.5px;
+        color: var(--ink);
+        cursor: pointer;
+        transition: transform 140ms ease, background 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+      }
+
+      .button:hover {
+        transform: translateY(-1px);
+        border-color: var(--blueprint);
+      }
+
+      .button:active {
+        transform: translateY(0);
+      }
+
+      .button.primary {
+        background: var(--blueprint);
+        border-color: var(--blueprint);
+        color: #08050f;
+        box-shadow: 0 0 16px rgba(179, 113, 251, 0.3);
+      }
+
+      html[data-theme="light"] .button.primary {
+        background: var(--ink);
+        color: var(--paper);
+        border-color: var(--ink);
+        box-shadow: none;
+      }
+
+      .button.primary:hover {
+        border-color: var(--signal);
+        box-shadow: 0 0 0 1px var(--signal), 0 0 18px rgba(61, 220, 132, 0.35);
+      }
+
+      .button.ghost {
+        background: transparent;
+      }
+
+      .button.small {
+        padding: 7px 10px;
+        font-size: 12px;
+      }
+
+      .icon-button {
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius);
+        padding: 9px 11px;
+        min-width: 42px;
+        background: var(--card);
+        color: var(--ink);
+        font-family: var(--font-mono);
+        font-weight: 700;
+        font-size: 12px;
+        cursor: pointer;
+        transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+      }
+
+      .icon-button:hover {
+        transform: translateY(-1px);
+        border-color: var(--blueprint);
+        color: var(--blueprint);
+      }
+
+      /* ================= Title block bar ================= */
+      .title-block {
+        border-bottom: 1px solid var(--border);
+        background: var(--card-alt);
+      }
+
+      .title-block-inner {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 22px;
+        align-items: center;
+        padding: 9px 0;
+        font-family: var(--font-mono);
+        font-size: 11.5px;
+        color: var(--ink-subtle);
+        letter-spacing: 0.02em;
+      }
+
+      .title-block-inner strong {
+        color: var(--ink-muted);
+        font-weight: 600;
+      }
+
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: var(--font-mono);
+        font-size: 11.5px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: var(--ink-muted);
+      }
+
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--success);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--success) 22%, transparent);
+      }
+
+      .status-dot.amber {
+        background: var(--amber);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--amber) 22%, transparent);
+      }
+
+      /* ================= Hero ================= */
+      .hero {
+        padding: 56px 0 48px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 1fr;
+        gap: 30px;
+        align-items: stretch;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: var(--blueprint);
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 22px;
+        height: 1px;
+        background: var(--blueprint);
+      }
+
+      .hero-title {
+        font-size: clamp(32px, 4.4vw, 54px);
+        line-height: 1.06;
+        margin-bottom: 16px;
+      }
+
+      .hero-title .accent {
+        color: var(--blueprint);
+      }
+
+      .hero-subtitle {
+        color: var(--ink-muted);
+        font-size: 16.5px;
+        line-height: 1.7;
+        max-width: 52ch;
+        margin-bottom: 22px;
+      }
+
+      .hero-ctas {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      /* ================= Terminal ================= */
+      .terminal {
+        border: 1px solid var(--border-strong);
+        background: #08040f;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+      }
+
+      .terminal-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        background: rgba(255, 255, 255, 0.04);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .terminal-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+      .terminal-dot.r {
+        background: #ff5f57;
+      }
+      .terminal-dot.a {
+        background: #febc2e;
+      }
+      .terminal-dot.g {
+        background: #28c840;
+      }
+
+      .terminal-title {
+        margin-left: 8px;
+        font-family: var(--font-mono);
+        font-size: 11.5px;
+        color: rgba(234, 240, 255, 0.5);
+      }
+
+      .terminal-body {
+        padding: 18px 16px 22px;
+        font-family: var(--font-mono);
+        font-size: 13.5px;
+        line-height: 1.9;
+        flex: 1;
+      }
+
+      .term-line {
+        color: rgba(234, 240, 255, 0.55);
+        opacity: 0;
+        transform: translateY(4px);
+        animation: term-in 420ms ease forwards;
+      }
+      .term-line .prompt {
+        color: #c98bff;
+        margin-right: 8px;
+      }
+      .term-line .cmd {
+        color: rgba(234, 240, 255, 0.92);
+      }
+      .term-out {
+        color: #3ddc84;
+        margin: 0 0 12px 0;
+        padding-left: 20px;
+        opacity: 0;
+        transform: translateY(4px);
+        animation: term-in 420ms ease forwards;
+      }
+      .term-out.accent-out {
+        color: #f0a8ff;
+      }
+
+      .term-line:nth-of-type(1) { animation-delay: 120ms; }
+      .term-out:nth-of-type(2) { animation-delay: 420ms; }
+      .term-line:nth-of-type(3) { animation-delay: 720ms; }
+      .term-out:nth-of-type(4) { animation-delay: 1020ms; }
+      .term-line:nth-of-type(5) { animation-delay: 1320ms; }
+      .term-out:nth-of-type(6) { animation-delay: 1620ms; }
+
+      .cursor {
+        display: inline-block;
+        width: 7px;
+        height: 14px;
+        background: #c98bff;
+        margin-left: 4px;
+        vertical-align: -2px;
+        animation: blink 1s step-end infinite;
+      }
+
+      @keyframes term-in {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .term-line,
+        .term-out {
+          opacity: 1;
+          transform: none;
+          animation: none;
+        }
+        .cursor {
+          animation: none;
+        }
+      }
+
+      /* ================= Measurement tiles (stats) ================= */
+      .measure-strip {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 30px;
+      }
+
+      .measure-tile {
+        position: relative;
+        border: 1px solid var(--border);
+        background: var(--card);
+        padding: 14px 16px;
+      }
+
+      .measure-tile::before,
+      .measure-tile::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border: 2px solid var(--blueprint);
+        opacity: 0.55;
+      }
+      .measure-tile::before {
+        top: -1px;
+        left: -1px;
+        border-right: 0;
+        border-bottom: 0;
+      }
+      .measure-tile::after {
+        bottom: -1px;
+        right: -1px;
+        border-left: 0;
+        border-top: 0;
+      }
+
+      .measure-value {
+        display: block;
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 22px;
+        color: var(--blueprint);
+      }
+
+      .measure-label {
+        display: block;
+        margin-top: 4px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.02em;
+        color: var(--ink-subtle);
+        text-transform: uppercase;
+      }
+
+      /* ================= Sections ================= */
+      .section {
+        padding: 64px 0;
+        scroll-margin-top: 70px;
+        border-top: 1px solid var(--border);
+      }
+
+      .section.no-rule {
+        border-top: none;
+      }
+
+      .section-head {
+        margin-bottom: 26px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .section-title {
+        font-size: 27px;
+      }
+
+      .section-subtitle {
+        color: var(--ink-muted);
+        line-height: 1.6;
+        max-width: 66ch;
+        margin-top: 8px;
+      }
+
+      .fig-tag {
+        font-family: var(--font-mono);
+        font-size: 11.5px;
+        color: var(--ink-subtle);
+        white-space: nowrap;
+      }
+
+      /* ================= Spec cards (projects/certs/coursework) ================= */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 14px;
+      }
+
+      .spec-card {
+        position: relative;
+        grid-column: span 6;
+        background: var(--card);
+        border: 1px solid var(--border);
+        transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+      }
+
+      .spec-card::before,
+      .spec-card::after {
+        content: "";
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border: 2px solid var(--blueprint);
+        opacity: 0;
+        transition: opacity 160ms ease;
+      }
+      .spec-card::before {
+        top: -1px;
+        left: -1px;
+        border-right: 0;
+        border-bottom: 0;
+      }
+      .spec-card::after {
+        bottom: -1px;
+        right: -1px;
+        border-left: 0;
+        border-top: 0;
+      }
+
+      .spec-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--border-strong);
+        box-shadow: var(--shadow);
+      }
+      .spec-card:hover::before,
+      .spec-card:hover::after {
+        opacity: 0.7;
+      }
+
+      .spec-card.full {
+        grid-column: span 12;
+      }
+
+      .spec-card.studio {
+        border-color: color-mix(in srgb, var(--blueprint) 40%, var(--border));
+        background: linear-gradient(180deg, color-mix(in srgb, var(--blueprint) 6%, var(--card)), var(--card));
+      }
+
+      .spec-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding: 10px 16px;
+        border-bottom: 1px solid var(--border);
+        background: var(--card-alt);
+        font-family: var(--font-mono);
+        font-size: 12px;
+      }
+
+      .spec-bar .prompt-line {
+        color: var(--ink-muted);
+      }
+      .spec-bar .prompt-line .prompt {
+        color: var(--blueprint);
+        margin-right: 6px;
+      }
+
+      .spec-body {
+        padding: 16px;
+      }
+
+      .spec-top {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 8px;
+      }
+
+      .card-title {
+        font-size: 17px;
+        font-weight: 700;
+      }
+
+      .card-links {
+        display: inline-flex;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .link {
+        text-decoration: none;
+        color: var(--blueprint);
+        font-weight: 700;
+        font-size: 13px;
+        border-bottom: 1px solid transparent;
+      }
+      .link:hover {
+        border-bottom-color: var(--blueprint);
+      }
+      .link.subtle {
+        color: var(--ink-subtle);
+        font-weight: 600;
+      }
+
+      .card-text {
+        color: var(--ink-muted);
+        line-height: 1.7;
+        font-size: 14.5px;
+        margin-bottom: 14px;
+      }
+
+      .meta {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+
+      .meta-item {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 3px;
+        padding: 8px 11px;
+        border: 1px solid var(--border);
+        background: var(--card-alt);
+      }
+
+      .meta-label {
+        font-family: var(--font-mono);
+        color: var(--ink-subtle);
+        font-size: 10.5px;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+
+      .meta-value {
+        color: var(--ink);
+        font-size: 12.5px;
+        font-weight: 700;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+      }
+
+      .tag {
+        padding: 5px 9px;
+        font-size: 11px;
+        font-weight: 700;
+        font-family: var(--font-mono);
+        border: 1px solid var(--border);
+        color: var(--ink-muted);
+        background: var(--card-alt);
+      }
+
+      /* ================= Skills ================= */
+      .skill-groups {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+
+      .skill-group {
+        border: 1px solid var(--border);
+        background: var(--card);
+        padding: 16px;
+      }
+
+      .skill-title {
+        font-family: var(--font-mono);
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--blueprint);
+        margin-bottom: 12px;
+        letter-spacing: 0.02em;
+      }
+
+      /* ================= Simple cards (about) ================= */
+      .plain-card {
+        grid-column: span 6;
+        border: 1px solid var(--border);
+        background: var(--card);
+        padding: 18px;
+      }
+
+      /* ================= Contact ================= */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+
+      /* ================= Footer ================= */
+      .site-footer {
+        border-top: 1px solid var(--border);
+        padding: 22px 0 30px;
+      }
+
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--ink-subtle);
+      }
+
+      /* ================= Responsive ================= */
+      @media (max-width: 900px) {
+        .nav {
+          display: none;
+        }
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+        .measure-strip {
+          grid-template-columns: 1fr;
+        }
+        .spec-card,
+        .plain-card {
+          grid-column: span 12;
+        }
+        .skill-groups {
+          grid-template-columns: 1fr;
+        }
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+        .title-block-inner {
+          font-size: 10.5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido" data-es="Saltar al contenido" data-en="Skip to content">Saltar al contenido</a>
+
+    <div class="title-block">
+      <div class="container title-block-inner">
+        <span><strong>DOC</strong> PORTFOLIO_CWB</span>
+        <span><strong>REV</strong> 2026.08</span>
+        <span class="status-pill"><span class="status-dot"></span><span data-es="disponible para trabajo remoto" data-en="open to remote work">disponible para trabajo remoto</span></span>
+      </div>
+    </div>
+
+    <header class="site-header" role="banner">
+      <div class="container header-inner">
+        <a class="brand" href="#inicio" aria-label="Inicio">
+          <span class="brand-mark" aria-hidden="true">CW</span>
+          <span class="brand-text">Carlos Wiebe Baca</span>
+        </a>
+
+        <nav class="nav" aria-label="Navegación principal">
+          <a class="nav-link" href="#sobre-mi" data-es="Sobre mí" data-en="About">Sobre mí</a>
+          <a class="nav-link" href="#experiencia" data-es="Experiencia" data-en="Experience">Experiencia</a>
+          <a class="nav-link" href="#cbdevs" data-es="Estudio" data-en="Studio">Estudio</a>
+          <a class="nav-link" href="#educacion" data-es="Educación" data-en="Education">Educación</a>
+          <a class="nav-link" href="#habilidades" data-es="Habilidades" data-en="Skills">Habilidades</a>
+          <a class="nav-link" href="#proyectos" data-es="Proyectos" data-en="Projects">Proyectos</a>
+          <a class="nav-link" href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="icon-button" type="button" id="langToggle" aria-label="Cambiar idioma / Switch language" title="Cambiar idioma / Switch language">EN</button>
+          <button class="icon-button" type="button" id="themeToggle" aria-label="Cambiar tema / Toggle theme" title="Cambiar tema / Toggle theme">●</button>
+          <a class="button ghost small" href="https://raw.githubusercontent.com/Haigawv3/plataformaderecho/main/CURRICULUM.pdf" target="_blank" rel="noreferrer">CV</a>
+          <a class="button primary small" href="https://www.linkedin.com/in/carloswiebebaca/" target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="contenido" class="site-main">
+      <section id="inicio" class="hero" aria-label="Presentación">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow" data-es="Ingeniería de Software" data-en="Software Engineering">Ingeniería de Software</p>
+            <h1 class="hero-title">
+              <span data-es="Desarrollo web con" data-en="Web development with">Desarrollo web con</span>
+              <span class="accent" data-es="enfoque en producto." data-en="a product focus.">enfoque en producto.</span>
+            </h1>
+            <p class="hero-subtitle" data-es="Soy Carlos Wiebe Baca. Construyo interfaces claras y sistemas web prácticos para resolver necesidades reales: desde portales internos hasta aplicaciones listas para producción." data-en="I'm Carlos Wiebe Baca. I build clear interfaces and practical web systems that solve real needs — from internal portals to production-ready applications.">
+              Soy Carlos Wiebe Baca. Construyo interfaces claras y sistemas web prácticos para resolver
+              necesidades reales: desde portales internos hasta aplicaciones listas para producción.
+            </p>
+
+            <div class="hero-ctas">
+              <a class="button primary" href="#proyectos" data-es="Ver proyectos" data-en="View projects">Ver proyectos</a>
+              <a class="button ghost" href="#contacto" data-es="Contactarme" data-en="Contact me">Contactarme</a>
+              <a class="button ghost" href="https://raw.githubusercontent.com/Haigawv3/plataformaderecho/main/CURRICULUM.pdf" target="_blank" rel="noreferrer" data-es="Descargar CV" data-en="Download CV">Descargar CV</a>
+            </div>
+
+            <div class="measure-strip" aria-label="Métricas">
+              <div class="measure-tile">
+                <span class="measure-value">2+</span>
+                <span class="measure-label" data-es="Apps publicadas" data-en="Published apps">Apps publicadas</span>
+              </div>
+              <div class="measure-tile">
+                <span class="measure-value">4+</span>
+                <span class="measure-label" data-es="Áreas clave" data-en="Key areas">Áreas clave</span>
+              </div>
+              <div class="measure-tile">
+                <span class="measure-value">MX</span>
+                <span class="measure-label" data-es="Ubicación" data-en="Location">Ubicación</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="terminal" aria-hidden="false">
+            <div class="terminal-bar">
+              <span class="terminal-dot r"></span>
+              <span class="terminal-dot a"></span>
+              <span class="terminal-dot g"></span>
+              <span class="terminal-title">carlos@portfolio — zsh</span>
+            </div>
+            <div class="terminal-body">
+              <p class="term-line"><span class="prompt">$</span><span class="cmd">whoami</span></p>
+              <p class="term-out">Carlos Wiebe Baca</p>
+              <p class="term-line"><span class="prompt">$</span><span class="cmd">stack --list</span></p>
+              <p class="term-out">React · Node.js · Python · SQL · Firebase</p>
+              <p class="term-line"><span class="prompt">$</span><span class="cmd">status --check</span></p>
+              <p class="term-out accent-out" data-es="disponible: true  // remoto o presencial" data-en="available: true  // remote or on-site">disponible: true  // remoto o presencial<span class="cursor"></span></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sobre-mi" class="section" aria-label="Sobre mí">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">FIG. 01</p>
+              <h2 class="section-title" data-es="Sobre mí" data-en="About me">Sobre mí</h2>
+              <p class="section-subtitle" data-es="Soy estudiante de Ingeniería en Desarrollo de Software. Me enfoco en construir productos web con interfaz clara, buen desempeño y despliegue listo para usarse." data-en="I'm a Software Engineering student. I focus on building web products with a clear interface, solid performance, and deployment-ready code.">
+                Soy estudiante de Ingeniería en Desarrollo de Software. Me enfoco en construir productos web con interfaz clara,
+                buen desempeño y despliegue listo para usarse.
+              </p>
+            </div>
+          </div>
+
+          <div class="cards">
+            <article class="plain-card" aria-label="Enfoque">
+              <h3 class="card-title" data-es="Enfoque" data-en="Focus">Enfoque</h3>
+              <p class="card-text" data-es="Priorizo formularios, flujos y experiencias en móvil para que una app o sitio sea fácil de usar y operar." data-en="I prioritize forms, flows, and mobile experiences so an app or site is easy to use and operate.">
+                Priorizo formularios, flujos y experiencias en móvil para que una app o sitio sea fácil de usar y operar.
+              </p>
+              <div class="tags" aria-label="Temas">
+                <span class="tag">UI/UX</span>
+                <span class="tag">Frontend</span>
+                <span class="tag">Web Apps</span>
+                <span class="tag">Deploy</span>
+              </div>
+            </article>
+
+            <article class="plain-card" aria-label="Disponibilidad">
+              <h3 class="card-title" data-es="Disponibilidad" data-en="Availability">Disponibilidad</h3>
+              <p class="card-text" data-es="Disponible para proyectos freelance, prácticas o vacantes remotas/presenciales." data-en="Available for freelance projects, internships, or remote/on-site roles.">
+                Disponible para proyectos freelance, prácticas o vacantes remotas/presenciales.
+              </p>
+              <a class="button primary small" href="#contacto" data-es="Hablemos" data-en="Let's talk">Hablemos</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="experiencia" class="section" aria-label="Experiencia">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">FIG. 02</p>
+              <h2 class="section-title" data-es="Experiencia" data-en="Experience">Experiencia</h2>
+              <p class="section-subtitle" data-es="Proyectos y prácticas donde he aplicado desarrollo web orientado a producto." data-en="Projects and practical work where I've applied product-oriented web development.">Proyectos y prácticas donde he aplicado desarrollo web orientado a producto.</p>
+            </div>
+          </div>
+
+          <div class="cards">
+            <article class="spec-card full" aria-label="Experiencia: Portal IMT">
+              <div class="spec-bar">
+                <span class="prompt-line"><span class="prompt">$</span>deploy --project portal-imt</span>
+                <span class="status-pill"><span class="status-dot"></span><span data-es="en producción" data-en="in production">en producción</span></span>
+              </div>
+              <div class="spec-body">
+                <div class="spec-top">
+                  <h3 class="card-title">Portal IMT</h3>
+                  <div class="card-links">
+                    <a class="link" href="https://IMTAPP-874c0.web.app" target="_blank" rel="noreferrer">Demo →</a>
+                  </div>
+                </div>
+                <p class="card-text" data-es="Portal web para registrar y administrar citas: permite crear nuevas citas, elegir tipo, asignar personal (mínimo dos) y establecer prioridad. Enfocado en operación diaria con formularios claros y validaciones." data-en="Web portal to register and manage appointments: create new appointments, choose a type, assign staff (at least two), and set priority. Focused on daily operations with clear forms and validations.">
+                  Portal web para registrar y administrar citas: permite crear nuevas citas, elegir tipo, asignar personal
+                  (mínimo dos) y establecer prioridad. Enfocado en operación diaria con formularios claros y validaciones.
+                </p>
+                <div class="meta">
+                  <div class="meta-item">
+                    <span class="meta-label" data-es="Despliegue" data-en="Deployment">Despliegue</span>
+                    <span class="meta-value">Firebase Hosting</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label" data-es="Enfoque" data-en="Focus">Enfoque</span>
+                    <span class="meta-value" data-es="Flujo de captura" data-en="Intake flow">Flujo de captura</span>
+                  </div>
+                </div>
+                <div class="tags" aria-label="Tecnologías o temas">
+                  <span class="tag" data-es="Formularios" data-en="Forms">Formularios</span>
+                  <span class="tag" data-es="Validaciones" data-en="Validations">Validaciones</span>
+                  <span class="tag" data-es="Operación" data-en="Operations">Operación</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="cbdevs" class="section" aria-label="CBDEVS">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">FIG. 03</p>
+              <h2 class="section-title">CBDEVS</h2>
+              <p class="section-subtitle" data-es="Además de mi trabajo como desarrollador, fundé un estudio de software propio." data-en="Alongside my work as a developer, I founded my own software studio.">
+                Además de mi trabajo como desarrollador, fundé un estudio de software propio.
+              </p>
+            </div>
+          </div>
+
+          <div class="cards">
+            <article class="spec-card full studio" aria-label="CBDEVS — Estudio de desarrollo de software">
+              <div class="spec-bar">
+                <span class="prompt-line"><span class="prompt">$</span>init --studio cbdevs</span>
+                <span class="status-pill"><span class="status-dot"></span><span data-es="activo" data-en="active">activo</span></span>
+              </div>
+              <div class="spec-body">
+                <div class="spec-top">
+                  <h3 class="card-title" data-es="CBDEVS — Estudio de Desarrollo de Software" data-en="CBDEVS — Software Development Studio">CBDEVS — Estudio de Desarrollo de Software</h3>
+                  <div class="card-links">
+                    <a class="link" href="https://cbdev-a74dc.web.app" target="_blank" rel="noreferrer" data-es="Ver CBDEVS" data-en="View CBDEVS">Ver CBDEVS →</a>
+                  </div>
+                </div>
+                <p class="card-text" data-es="Cofundé CBDEVS, un estudio que diseña y desarrolla sitios web, aplicaciones web y software a la medida para negocios en crecimiento, desde landing pages hasta sistemas con pagos y roles de usuario." data-en="I co-founded CBDEVS, a studio that designs and builds websites, web applications, and custom software for growing businesses — from landing pages to full systems with payments and user roles.">
+                  Cofundé CBDEVS, un estudio que diseña y desarrolla sitios web, aplicaciones web y software a la medida
+                  para negocios en crecimiento, desde landing pages hasta sistemas con pagos y roles de usuario.
+                </p>
+                <div class="meta">
+                  <div class="meta-item">
+                    <span class="meta-label" data-es="Rol" data-en="Role">Rol</span>
+                    <span class="meta-value" data-es="Fundador" data-en="Founder">Fundador</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label" data-es="Despliegue" data-en="Deployment">Despliegue</span>
+                    <span class="meta-value">Firebase Hosting</span>
+                  </div>
+                </div>
+                <div class="tags" aria-label="Servicios">
+                  <span class="tag" data-es="Desarrollo Web" data-en="Web Development">Desarrollo Web</span>
+                  <span class="tag" data-es="Aplicaciones Web" data-en="Web Applications">Aplicaciones Web</span>
+                  <span class="tag" data-es="Software a la medida" data-en="Custom Software">Software a la medida</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="educacion" class="section" aria-label="Educación">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">FIG. 04</p>
+              <h2 class="section-title" data-es="Educación" data-en="Education">Educación</h2>
+              <p class="section-subtitle" data-es="Formación actual y enfoque de aprendizaje." data-en="Current studies and learning focus.">Formación actual y enfoque de aprendizaje.</p>
+            </div>
+          </div>
+
+          <div class="cards">
+            <article class="spec-card" aria-label="Educación: Tecmilenio">
+              <div class="spec-bar">
+                <span class="prompt-line"><span class="prompt">$</span>study --track software-eng</span>
+                <span class="status-pill"><span class="status-dot amber"></span><span data-es="en curso" data-en="in progress">en curso</span></span>
+              </div>
+              <div class="spec-body">
+                <div class="spec-top">
+                  <h3 class="card-title" data-es="Ingeniería en Desarrollo de Software" data-en="Software Engineering">Ingeniería en Desarrollo de Software</h3>
+                </div>
+                <p class="card-text link subtle" style="margin-bottom:14px;">Universidad Tecmilenio</p>
+                <div class="tags" aria-label="Enfoque">
+                  <span class="tag" data-es="Desarrollo de software" data-en="Software development">Desarrollo de software</span>
+                  <span class="tag">Frontend</span>
+                  <span class="tag">Cloud</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="spec-card" aria-label="Educación: TripleTen">
+              <div class="spec-bar">
+                <span class="prompt-line"><span class="prompt">$</span>study --track data-analyst</span>
+                <span class="status-pill"><span class="status-dot amber"></span><span data-es="en curso" data-en="in progress">en curso</span></span>
+              </div>
+              <div class="spec-body">
+                <div class="spec-top">
+                  <h3 class="card-title" data-es="Bootcamp Data Analyst" data-en="Data Analyst Bootcamp">Bootcamp Data Analyst</h3>
+                </div>
+                <p class="card-text link subtle" style="margin-bottom:14px;">TripleTen</p>
+                <div class="tags" aria-label="Enfoque">
+                  <span class="tag">Data analysis</span>
+                  <span class="tag">SQL</span>
+                  <span class="tag">Python</span>
+                  <span class="tag" data-es="Visualización" data-en="Visualization">Visualización</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="habilidades" class="section" aria-label="Habilidades">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">FIG. 05</p>
+              <h2 class="section-title" data-es="Habilidades" data-en="Skills">Habilidades</h2>
+              <p class="section-subtitle" data-es="Stack y temas donde me siento más fuerte y en los que sigo aprendiendo." data-en="The stack and topics where I'm strongest and still growing.">Stack y temas donde me siento más fuerte y en los que sigo aprendiendo.</p>
+            </div>
+          </div>
+
+          <div class="skill-groups" aria-label="Grupos de habilidades">
+            <div class="skill-group" aria-label="Habilidades: Frontend">
+              <h3 class="skill-title">// frontend</h3>
+              <div class="tags" aria-label="Frontend">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Responsive UI</span>
+              </div>
+            </div>
+
+            <div class="skill-group" aria-label="Habilidades: Backend y bases de datos">
+              <h3 class="skill-title" data-es="// backend &amp; datos" data-en="// backend &amp; data">// backend &amp; datos</h3>
+              <div class="tags" aria-label="Backend y datos">
+                <span class="tag">Python</span>
+                <span class="tag">APIs</span>
+                <span class="tag">CRUD</span>
+                <span class="tag" data-es="Validaciones" data-en="Validations">Validaciones</span>
+              </div>
+            </div>
+
+            <div class="skill-group" aria-label="Habilidades: Herramientas">
+              <h3 class="skill-title" data-es="// herramientas" data-en="// tools">// herramientas</h3>
+              <div class="tags" aria-label="Herramientas">
+                <span class="tag">Git</span>
+                <span class="tag">Linux</span>
+                <span class="tag">Firebase Hosting</span>
+                <span class="tag">Deploy</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="proyectos" class="section" aria-label="Proyectos">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">FIG. 06</p>
+              <h2 class="section-title" data-es="Proyectos" data-en="Projects">Proyectos</h2>
+              <p class="section-subtitle" data-es="Algunos trabajos donde se puede ver cómo diseño flujos, priorizo claridad y construyo funciones y características útiles." data-en="A few projects that show how I design flows, prioritize clarity, and build useful features.">
+                Algunos trabajos donde se puede ver cómo diseño flujos, priorizo claridad y construyo funciones y características útiles.
+              </p>
+            </div>
+          </div>
+
+          <div class="cards">
+            <article class="spec-card full" aria-label="Proyecto: Checador Bodegas">
+              <div class="spec-bar">
+                <span class="prompt-line"><span class="prompt">$</span>deploy --project checador-bodegas</span>
+                <span class="status-pill"><span class="status-dot"></span><span data-es="en producción" data-en="in production">en producción</span></span>
+              </div>
+              <div class="spec-body">
+                <div class="spec-top">
+                  <h3 class="card-title">Checador Bodegas</h3>
+                  <div class="card-links">
+                    <a class="link" href="https://checador-bodegas.web.app" target="_blank" rel="noreferrer">Demo →</a>
+                    <a class="link subtle" href="https://www.linkedin.com/in/carloswiebebaca/" target="_blank" rel="noreferrer" data-es="Más en LinkedIn" data-en="More on LinkedIn">Más en LinkedIn</a>
+                  </div>
+                </div>
+                <p class="card-text" data-es="Aplicación web para control y registro con enfoque en operación. Interfaz clara, navegación simple y despliegue en Firebase." data-en="Web application for tracking and logging with an operations focus. Clear interface, simple navigation, and Firebase deployment.">
+                  Aplicación web para control y registro con enfoque en operación. Interfaz clara, navegación simple y despliegue en Firebase.
+                </p>
+                <div class="meta">
+                  <div class="meta-item">
+                    <span class="meta-label" data-es="Despliegue" data-en="Deployment">Despliegue</span>
+                    <span class="meta-value">Firebase Hosting</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label" data-es="Enfoque" data-en="Focus">Enfoque</span>
+                    <span class="meta-value" data-es="Operación" data-en="Operations">Operación</span>
+                  </div>
+                </div>
+                <div class="tags" aria-label="Tecnologías o temas">
+                  <span class="tag">Web App</span>
+                  <span class="tag">UI</span>
+                  <span class="tag">Deploy</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="trabajos" class="section" aria-label="Trabajos escolares">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">FIG. 07</p>
+              <h2 class="section-title" data-es="Trabajos escolares" data-en="School projects">Trabajos escolares</h2>
+              <p class="section-subtitle" data-es="Evidencia de actividades y reportes: análisis, documentación técnica y práctica con código." data-en="Evidence of coursework: analysis, technical documentation, and hands-on coding practice.">
+                Evidencia de actividades y reportes: análisis, documentación técnica y práctica con código.
+              </p>
+            </div>
+          </div>
+
+          <div class="cards">
+            <article class="plain-card" aria-label="Trabajo: Diseño de Red, Seguridad y Sistemas Distribuidos">
+              <h3 class="card-title" data-es="Diseño de Red, Seguridad y Sistemas Distribuidos" data-en="Network Design, Security, and Distributed Systems">Diseño de Red, Seguridad y Sistemas Distribuidos</h3>
+              <p class="card-text" data-es="Diseño e implementación de una red básica con máquinas virtuales Linux: IP estática, servicios de red, medidas de seguridad y conceptos de comunicación distribuida." data-en="Design and implementation of a basic network using Linux virtual machines: static IP, network services, security measures, and distributed communication concepts.">
+                Diseño e implementación de una red básica con máquinas virtuales Linux: IP estática, servicios de red,
+                medidas de seguridad y conceptos de comunicación distribuida.
+              </p>
+              <div class="tags" aria-label="Temas">
+                <span class="tag" data-es="Redes" data-en="Networking">Redes</span>
+                <span class="tag">Linux</span>
+                <span class="tag" data-es="Seguridad" data-en="Security">Seguridad</span>
+              </div>
+            </article>
+
+            <article class="plain-card" aria-label="Trabajo: Sistema distribuido de monitoreo y comunicación">
+              <h3 class="card-title" data-es="Sistema distribuido de monitoreo y comunicación" data-en="Distributed Monitoring and Communication System">Sistema distribuido de monitoreo y comunicación</h3>
+              <p class="card-text" data-es="Diseño de un sistema con cliente/servidor para monitorear y gestionar procesos por TCP/IP, incluyendo middleware para descubrimiento de servicios." data-en="Design of a client/server system to monitor and manage processes over TCP/IP, including middleware for service discovery.">
+                Diseño de un sistema con cliente/servidor para monitorear y gestionar procesos por TCP/IP, incluyendo
+                middleware para descubrimiento de servicios.
+              </p>
+              <div class="tags" aria-label="Temas">
+                <span class="tag" data-es="Distribuidos" data-en="Distributed systems">Distribuidos</span>
+                <span class="tag">TCP/IP</span>
+                <span class="tag">Middleware</span>
+              </div>
+            </article>
+
+            <article class="plain-card" aria-label="Trabajo: Programación orientada a objetos en Java">
+              <h3 class="card-title" data-es="POO en Java: clase Coche + UML" data-en="OOP in Java: Car class + UML">POO en Java: clase Coche + UML</h3>
+              <p class="card-text" data-es="Diseño de una clase en Java aplicando abstracción y encapsulación, con diagrama UML e interacción de entrada/salida para capturar y mostrar información del objeto." data-en="Design of a Java class applying abstraction and encapsulation, with a UML diagram and input/output interaction to capture and display object data.">
+                Diseño de una clase en Java aplicando abstracción y encapsulación, con diagrama UML e interacción de
+                entrada/salida para capturar y mostrar información del objeto.
+              </p>
+              <div class="tags" aria-label="Temas">
+                <span class="tag">Java</span>
+                <span class="tag" data-es="POO" data-en="OOP">POO</span>
+                <span class="tag">UML</span>
+              </div>
+            </article>
+
+            <article class="plain-card" aria-label="Trabajo: Juego en Python con pygame">
+              <h3 class="card-title" data-es="Juego en Python con pygame" data-en="Python game with pygame">Juego en Python con pygame</h3>
+              <p class="card-text" data-es="Manual y documentación de un mini juego: controlar al jugador, atrapar frutas para sumar puntos y evitar obstáculos, desarrollado en Python usando pygame." data-en="Manual and documentation for a mini game: control the player, catch fruit to score points, and avoid obstacles, built in Python using pygame.">
+                Manual y documentación de un mini juego: controlar al jugador, atrapar frutas para sumar puntos y
+                evitar obstáculos, desarrollado en Python usando pygame.
+              </p>
+              <div class="tags" aria-label="Temas">
+                <span class="tag">Python</span>
+                <span class="tag">pygame</span>
+                <span class="tag" data-es="Juego" data-en="Game">Juego</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="certificados" class="section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">FIG. 08</p>
+              <h2 class="section-title" data-es="Certificados" data-en="Certifications">Certificados</h2>
+              <p class="section-subtitle" data-es="Certificaciones y cursos relevantes. El detalle completo está disponible en LinkedIn." data-en="Relevant certifications and courses. Full details available on LinkedIn.">
+                Certificaciones y cursos relevantes. El detalle completo está disponible en LinkedIn.
+              </p>
+            </div>
+          </div>
+
+          <div class="cards">
+            <article class="plain-card" aria-label="Certificado: Red Hat System Administration I">
+              <h3 class="card-title">Red Hat System Administration I (RH124 - RHA) · Ver. 10</h3>
+              <p class="card-text" data-es="Red Hat · Emitido Feb 2026" data-en="Red Hat · Issued Feb 2026">Red Hat · Emitido Feb 2026</p>
+              <div class="tags" aria-label="Áreas" style="margin-bottom:12px;">
+                <span class="tag">Linux</span>
+                <span class="tag">Sysadmin</span>
+              </div>
+              <a class="link" href="https://www.linkedin.com/in/carloswiebebaca/" target="_blank" rel="noreferrer" data-es="Ver en LinkedIn" data-en="View on LinkedIn">Ver en LinkedIn →</a>
+            </article>
+
+            <article class="plain-card" aria-label="Certificado: Python Essentials 1">
+              <h3 class="card-title">Python Essentials 1</h3>
+              <p class="card-text" data-es="Cisco · Emitido Feb 2025" data-en="Cisco · Issued Feb 2025">Cisco · Emitido Feb 2025</p>
+              <div class="tags" aria-label="Áreas" style="margin-bottom:12px;">
+                <span class="tag">Python</span>
+                <span class="tag">Software</span>
+              </div>
+              <a class="link" href="https://www.linkedin.com/in/carloswiebebaca/" target="_blank" rel="noreferrer" data-es="Ver en LinkedIn" data-en="View on LinkedIn">Ver en LinkedIn →</a>
+            </article>
+
+            <article class="plain-card" aria-label="Certificado: AWS Academy Graduate Cloud Foundations">
+              <h3 class="card-title">AWS Academy Graduate · Cloud Foundations</h3>
+              <p class="card-text" data-es="Amazon Web Services (AWS) · Emitido Sep 2025" data-en="Amazon Web Services (AWS) · Issued Sep 2025">Amazon Web Services (AWS) · Emitido Sep 2025</p>
+              <div class="tags" aria-label="Áreas" style="margin-bottom:12px;">
+                <span class="tag">AWS</span>
+                <span class="tag">Cloud</span>
+              </div>
+              <a class="link" href="https://www.linkedin.com/in/carloswiebebaca/" target="_blank" rel="noreferrer" data-es="Ver en LinkedIn" data-en="View on LinkedIn">Ver en LinkedIn →</a>
+            </article>
+
+            <article class="plain-card" aria-label="Certificado: Fundamentos de Programación">
+              <h3 class="card-title" data-es="Fundamentos de Programación (Sobresaliente)" data-en="Programming Fundamentals (Outstanding)">Fundamentos de Programación (Sobresaliente)</h3>
+              <p class="card-text" data-es="Universidad Tecmilenio · Emitido Ene 2026" data-en="Universidad Tecmilenio · Issued Jan 2026">Universidad Tecmilenio · Emitido Ene 2026</p>
+              <div class="tags" aria-label="Áreas" style="margin-bottom:12px;">
+                <span class="tag">HTML</span>
+                <span class="tag">Frontend</span>
+                <span class="tag">Python</span>
+              </div>
+              <a class="link" href="https://www.linkedin.com/in/carloswiebebaca/" target="_blank" rel="noreferrer" data-es="Ver en LinkedIn" data-en="View on LinkedIn">Ver en LinkedIn →</a>
+            </article>
+
+            <article class="plain-card" aria-label="Certificado: Inglés Intermedio Alto">
+              <h3 class="card-title" data-es="Inglés Intermedio Alto (Sobresaliente)" data-en="Upper-Intermediate English (Outstanding)">Inglés Intermedio Alto (Sobresaliente)</h3>
+              <p class="card-text" data-es="Universidad Tecmilenio · Emitido Ene 2026" data-en="Universidad Tecmilenio · Issued Jan 2026">Universidad Tecmilenio · Emitido Ene 2026</p>
+              <div class="tags" aria-label="Áreas" style="margin-bottom:12px;">
+                <span class="tag" data-es="Comunicación" data-en="Communication">Comunicación</span>
+              </div>
+              <a class="link" href="https://www.linkedin.com/in/carloswiebebaca/" target="_blank" rel="noreferrer" data-es="Ver en LinkedIn" data-en="View on LinkedIn">Ver en LinkedIn →</a>
+            </article>
+
+            <article class="plain-card" aria-label="Certificado: Computación en la Nube">
+              <h3 class="card-title" data-es="Computación en la Nube" data-en="Cloud Computing">Computación en la Nube</h3>
+              <p class="card-text" data-es="Universidad Tecmilenio · Emitido Oct 2025" data-en="Universidad Tecmilenio · Issued Oct 2025">Universidad Tecmilenio · Emitido Oct 2025</p>
+              <div class="tags" aria-label="Áreas" style="margin-bottom:12px;">
+                <span class="tag">Cloud</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">HTML</span>
+              </div>
+              <a class="link" href="https://www.linkedin.com/in/carloswiebebaca/" target="_blank" rel="noreferrer" data-es="Ver en LinkedIn" data-en="View on LinkedIn">Ver en LinkedIn →</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contacto" class="section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">FIG. 09</p>
+              <h2 class="section-title" data-es="Contacto" data-en="Contact">Contacto</h2>
+              <p class="section-subtitle" data-es="Si quieres colaborar o tienes una vacante, aquí están mis enlaces principales." data-en="If you'd like to collaborate or have an opening, here are my main contact links.">
+                Si quieres colaborar o tienes una vacante, aquí están mis enlaces principales.
+              </p>
+            </div>
+          </div>
+
+          <div class="contact-grid">
+            <div class="spec-card">
+              <div class="spec-bar">
+                <span class="prompt-line"><span class="prompt">$</span>contact --linkedin</span>
+              </div>
+              <div class="spec-body">
+                <h3 class="card-title">LinkedIn</h3>
+                <p class="card-text" data-es="Mensajes y networking profesional." data-en="Messages and professional networking.">Mensajes y networking profesional.</p>
+                <a class="button primary small" href="https://www.linkedin.com/in/carloswiebebaca/" target="_blank" rel="noreferrer" data-es="Abrir LinkedIn" data-en="Open LinkedIn">Abrir LinkedIn</a>
+              </div>
+            </div>
+
+            <div class="spec-card">
+              <div class="spec-bar">
+                <span class="prompt-line"><span class="prompt">$</span>contact --whatsapp</span>
+              </div>
+              <div class="spec-body">
+                <h3 class="card-title">WhatsApp</h3>
+                <p class="card-text" data-es="Contacto rápido para proyectos y oportunidades." data-en="Quick contact for projects and opportunities.">Contacto rápido para proyectos y oportunidades.</p>
+                <a
+                  class="button primary small"
+                  href="https://wa.me/14322022112?text=Hola%20Carlos%2C%20vi%20tu%20portafolio%20y%20me%20gustar%C3%ADa%20hablar%20contigo."
+                  target="_blank"
+                  rel="noreferrer"
+                  data-es="Enviar mensaje"
+                  data-en="Send message"
+                  style="margin-bottom:8px;"
+                >Enviar mensaje</a>
+                <a class="button ghost small" href="tel:+14322022112">+1 (432) 202-2112</a>
+              </div>
+            </div>
+
+            <div class="spec-card">
+              <div class="spec-bar">
+                <span class="prompt-line"><span class="prompt">$</span>contact --email</span>
+              </div>
+              <div class="spec-body">
+                <h3 class="card-title" data-es="Correo" data-en="Email">Correo</h3>
+                <p class="card-text" data-es="Escríbeme por correo para cualquier oportunidad." data-en="Reach out by email for any opportunity.">Escríbeme por correo para cualquier oportunidad.</p>
+                <a class="button ghost small" href="mailto:evercool09@hotmail.com">evercool09@hotmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>// © <span id="year"></span> Carlos Wiebe Baca — EOF</p>
+        <a class="link subtle" href="#inicio" data-es="Volver arriba" data-en="Back to top">Volver arriba</a>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        var LANG_KEY = 'site-lang';
+        var THEME_KEY = 'site-theme';
+        var translatable = document.querySelectorAll('[data-en]');
+        var langBtn = document.getElementById('langToggle');
+        var themeBtn = document.getElementById('themeToggle');
+
+        function applyLang(lang) {
+          document.documentElement.setAttribute('lang', lang);
+          translatable.forEach(function (el) {
+            var text = el.getAttribute('data-' + lang);
+            if (text) el.textContent = text;
+          });
+          if (langBtn) langBtn.textContent = lang === 'en' ? 'ES' : 'EN';
+          try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+        }
+
+        function applyTheme(theme) {
+          document.documentElement.setAttribute('data-theme', theme);
+          if (themeBtn) themeBtn.textContent = theme === 'dark' ? '○' : '●';
+          try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
+        }
+
+        var initialLang = 'es';
+        try { initialLang = localStorage.getItem(LANG_KEY) || 'es'; } catch (e) {}
+        applyLang(initialLang);
+
+        var initialTheme = 'dark';
+        try {
+          initialTheme = localStorage.getItem(THEME_KEY) || 'dark';
+        } catch (e) {}
+        applyTheme(initialTheme);
+
+        if (langBtn) {
+          langBtn.addEventListener('click', function () {
+            var current = document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'es';
+            applyLang(current === 'es' ? 'en' : 'es');
+          });
+        }
+
+        if (themeBtn) {
+          themeBtn.addEventListener('click', function () {
+            var current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+            applyTheme(current === 'light' ? 'dark' : 'light');
+          });
+        }
+
+        var yearEl = document.getElementById('year');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+      })();
+    </script>
+  </body>
+</html>
